@@ -1,0 +1,25 @@
+/**
+* css 函数 实现通用性
+
+** 伪类 + transform 
+原理是把原先元素的 border 去掉，然后利用 :before 或者 :after 重做 border ，并 transform 的 scale 缩小一半，原先的元素相对定位，新做的 border 绝对定位
+**/
+border-1px($color)
+  position: relative
+  &:after
+    display: block
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 100%
+    border-top: 1px solid $color
+    content: ' '
+
+border-none()
+  &:after
+    display: none
+
+bg-image($url)
+  background-image: url($url + "@2x.png")
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    background-image: url($url + "@3x.png")
