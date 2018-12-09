@@ -32,13 +32,7 @@
                   <span v-show="food.oldPrice !='' " class="old">¥{{ food.oldPrice }}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <div class="cartcontrol">
-                    <div class="cart-decrease">
-                      <span class="inner icon-remove_circle_outline"></span>
-                    </div>
-                    <div class="cart-count"></div>
-                    <div class="cart-add icon-add_circle"></div> 
-                  </div>
+                  <cartcontrol :food="food"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -54,6 +48,7 @@
 import axios from "axios"
 import BScroll from 'better-scroll'
 import shopcart from 'components/shopcart/shopcart'
+import cartcontrol from 'components/cartcontrol/cartcontrol'
 
 const ERR_OK = 0; // 数据请求成功状态码
 export default {
@@ -103,9 +98,11 @@ export default {
     // 菜单点击事件
     selectMenus(index,event) {
       // 区分浏览器还是手机端点击
-       if (!event._constructed) {
-          return;
-        }
+        if (!event._constructed) {
+        //如果不存在这个属性,则为原生点击事件，不执行下面的函数PC页面时,点击不会被 better-scroll阻止事件
+           return;
+         }
+      console.log('menu click')
       let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
       let el = foodList[index]
       // 滚动到 food 位置
@@ -117,8 +114,9 @@ export default {
         click:true // 默认阻止点击
       })
       this.foodsScroll = new BScroll(this.$refs.foodsWrapper,{
-        probeType : 3, // 监听滚动Y位置
-        click:true
+        click:true,
+        probeType : 3 // 监听滚动Y位置
+       
       })
       this.foodsScroll.on('scroll',(pos)=>{
         this.scrollY = Math.abs(Math.round(pos.y))
@@ -135,13 +133,13 @@ export default {
         height+=item.clientHeight
         this.listHeight.push(height)
       }
-      console.log(this.listHeight)
     }
     
     
   },
   components: {
-    shopcart
+    shopcart,
+    cartcontrol
   },
 }
 
@@ -257,35 +255,7 @@ export default {
             position: absolute
             right: 0
             bottom: 12px
-            .cartcontrol
-              font-size:0
-              .cart-decrease
-                display: inline-block
-                padding: 6px
-                opacity :1
-                transform :translate3d(0,0,0)
-                .inner
-                  display: inline-block
-                  line-height: 24px
-                  font-size: 24px
-                  color: #00a0dc
-                  transition: all 0.4s linear
-                  transform: rotate(0)
-              .cart-count
-                display: inline-block;
-                vertical-align: top;
-                width: 12px;
-                padding-top: 6px;
-                line-height: 24px;
-                text-align: center;
-                font-size: 10px;
-                color: #93999f;
-              .cart-add
-                display: inline-block;
-                padding: 6px;
-                line-height: 24px;
-                font-size: 24px;
-                color: #00a0dc;
+            
 
 
 
