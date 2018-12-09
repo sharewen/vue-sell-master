@@ -253,3 +253,5 @@ flex-basis 表示项目在主轴上占据的空间，默认值为auto
       this.foodsScroll.scrollToElement(el,300)
     }
 ## Vue.js 不能检测到对象属性的添加或删除。因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的。
+ this.$set(this.food,"count",1); 
+ ##2.0
