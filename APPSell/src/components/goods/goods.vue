@@ -40,7 +40,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart :selectFoods="selectedFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -92,7 +92,19 @@ export default {
         }
       }
       return 0;
+    },
+    selectedFoods(){
+      let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
+        return foods;
     }
+
   },
   methods: {
     // 菜单点击事件
