@@ -255,3 +255,31 @@ flex-basis 表示项目在主轴上占据的空间，默认值为auto
 ## Vue.js 不能检测到对象属性的添加或删除。因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的。
  this.$set(this.food,"count",1); 
  ##2.0
+ ## transition 
+ <transition> 元素作为单个元素/组件的过渡效果。<transition> 只会把过渡效果应用到其包裹的内容上，而不会额外渲染 DOM 元素，也不会出现在检测过的组件层级中。
+
+<!-- 简单元素 -->
+<transition>
+  <div v-if="ok">toggled content</div>
+</transition>
+
+<!-- 动态组件 -->
+<transition name="fade" mode="out-in" appear>
+  <component :is="view"></component>
+</transition>
+
+<!-- 事件钩子 -->
+<div id="transition-demo">
+  <transition @after-enter="transitionComplete">
+    <div v-show="ok">toggled content</div>
+  </transition>
+</div>
+new Vue({
+  ...
+  methods: {
+    transitionComplete: function (el) {
+      // 传入 'el' 这个 DOM 元素作为参数。
+    }
+  }
+  ...
+}).$mount('#transition-demo')

@@ -40,8 +40,11 @@ export default {
             }else{
                 this.food.count++;
             }
-            console.log(this.food.count,'add')
-           
+            console.log(this.food.count,'add',event.target)
+           // 子组件 派发事件给父组件
+           this.$emit("addCart",event.target)
+
+
         },
         decreaseCart(event){
             if(!event._constructed){

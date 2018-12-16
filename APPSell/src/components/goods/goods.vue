@@ -32,7 +32,7 @@
                   <span v-show="food.oldPrice !='' " class="old">¥{{ food.oldPrice }}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol @addCart="foodAdd" :food="food"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -40,7 +40,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :selectFoods="selectedFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart  ref="shopcart" :selectFoods="selectedFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -94,6 +94,7 @@ export default {
       return 0;
     },
     selectedFoods(){
+      // 计算属性 监听 foods 变化
       let foods = [];
         this.goods.forEach((good) => {
           good.foods.forEach((food) => {
@@ -145,6 +146,17 @@ export default {
         height+=item.clientHeight
         this.listHeight.push(height)
       }
+    },
+    _drop(target){
+      //调用 shopCart 方法
+        // 体验优化,异步执行下落动画
+        this.$nextTick(() => {
+          this.$refs.shopcart.drop(target);
+        });
+    },
+    foodAdd(el){
+      this._drop(el);
+      console.log(this.$refs.shopcart,'fufu')
     }
     
     

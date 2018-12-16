@@ -195,6 +195,8 @@
         let count = this.balls.length;
         while (count--) {
           let ball = this.balls[count];
+         /* eslint-disable */ 
+         console.log(ball ,ball.show, count)
           if (ball.show) {
             let rect = ball.el.getBoundingClientRect();
             let x = rect.left - 32;
@@ -210,7 +212,7 @@
       },
       dropping(el, done) {
         /* eslint-disable no-unused-vars */
-        let rf = el.offsetHeight;
+        let rf = el.offsetHeight;//因为浏览器对于重绘是有要求并且是有队列完成的,这是主要为了性能,虽然动画隐藏了小球display none,但没有触发html重绘,或者说没有立即触发html重绘,所以需要手动
         this.$nextTick(() => {
           el.style.webkitTransform = 'translate3d(0,0,0)';
           el.style.transform = 'translate3d(0,0,0)';
