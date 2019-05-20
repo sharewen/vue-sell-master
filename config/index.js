@@ -48,6 +48,7 @@ module.exports = {
   },
   
   build: {
+    env:require('./prod.env'),
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
@@ -55,7 +56,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '',
-
+    port:9000,
     /**
      * Source Maps
      */

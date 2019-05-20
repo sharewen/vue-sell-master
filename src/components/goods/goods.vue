@@ -53,7 +53,7 @@
   import food from 'components/food/food';
 
   const ERR_OK = 0;
-  const debug = process.env.NODE_ENV !== 'production';
+ // const debug = process.env.NODE_ENV !== 'production';
 
   export default {
     props: {
@@ -96,7 +96,7 @@
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
 
-      const url = debug ? '/api/goods' : 'http://ustbhuangyi.com/sell/api/goods';
+      const url = '/api/goods';
       this.$http.get(url).then((response) => {
         response = response.body;
         if (response.errno === ERR_OK) {
