@@ -3,15 +3,14 @@
     <router-link tag="div" class="tab-item" to="/recommend">
       <span class="tab-link">推荐</span>
     </router-link>
-    <router-link tag="div" class="tab-item" to="/singer">
-      <span class="tab-link">歌手</span>
+    <router-link tag="div" class="tab-item" to="/carFriends">
+      <span class="tab-link">车友圈</span>
     </router-link>
-    <router-link tag="div" class="tab-item" to="/rank">
-      <span class="tab-link">排行
-      </span>
+    <router-link tag="div" class="tab-item" to="/banClass">
+      <span class="tab-link">小斑课堂</span>
     </router-link>
-    <router-link tag="div" class="tab-item" to="/search">
-      <span class="tab-link">搜索</span>
+    <router-link tag="div" class="tab-item" to="/active">
+      <span class="tab-link">活动</span>
     </router-link>
   </div>
 </template>
