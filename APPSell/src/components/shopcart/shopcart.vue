@@ -60,177 +60,173 @@
 import BScroll from 'better-scroll'
 import cartcontrol from 'components/cartcontrol/cartcontrol'
 export default {
-  props:{
-      selectFoods:{
-          type:Array,
-          default(){ //默认值 为函数
+  props: {
+      selectFoods: {
+          type: Array,
+          default() { // 默认值 为函数
               return []
           }
       },
-      deliveryPrice:{
-          type:Number,
-          default:0
+      deliveryPrice: {
+          type: Number,
+          default: 0
       },
-      minPrice:{
-          type:Number,
-          default:0
+      minPrice: {
+          type: Number,
+          default: 0
       }
   },
   data () {
     return {
-       balls:[
+       balls: [
            {
-               show:false
+               show: false
             },
             {
-               show:false
+               show: false
             },
             {
-               show:false
+               show: false
             },
             {
-               show:false
+               show: false
             },
             {
-               show:false
-            },
+               show: false
+            }
        ],
-       dropBalls:[],
-       fold:true
-    };
+       dropBalls: [],
+       fold: true
+    }
   },
   components: {
       cartcontrol
   },
     
   methods: {
-      drop(el){
-        console.log(el,'shopcart')
-        for(let i=0;i<this.balls.length;i++){
-            let ball =this.balls[i];
-            if(!ball.show){
-                ball.show = true;//触发动画
-                ball.el = el;
-                console.log(ball,i,ball.show)
-                this.dropBalls.push(ball);
-                return;
+      drop(el) {
+        console.log(el, 'shopcart')
+        for (let i = 0; i < this.balls.length; i++) {
+            let ball = this.balls[i]
+            if (!ball.show) {
+                ball.show = true// 触发动画
+                ball.el = el
+                console.log(ball, i, ball.show)
+                this.dropBalls.push(ball)
+                return
             }
         }
         console.log(this.balls)
     },
-    //transition 钩子方法
-    beforeDrop(el){
+    // transition 钩子方法
+    beforeDrop(el) {
         console.log('before')
-        let count = this.balls.length;
-        while(count --){
-            let ball=this.balls[count];
-            console.log(ball,count,ball.show)
-            if(ball.show){
-                let rect = ball.el.getBoundingClientRect();//当前小球 所在视口的位置
-                let x = rect.left - 32;
-                let y = -(window.innerHeight - rect.top - 22);
-                el.style.display = '';
-                el.style.webkitTransform = `translate3d(0,${y}px,0)`;
-                el.style.transform = `translate3d(0,${y}px,0)`;
-                let inner = el.getElementsByClassName('inner-hook')[0];
-                inner.style.webkitTransform = `translate3d(${x}px,0,0)`;
-                inner.style.transform = `translate3d(${x}px,0,0)`;
+        let count = this.balls.length
+        while (count--) {
+            let ball = this.balls[count]
+            console.log(ball, count, ball.show)
+            if (ball.show) {
+                let rect = ball.el.getBoundingClientRect()// 当前小球 所在视口的位置
+                let x = rect.left - 32
+                let y = -(window.innerHeight - rect.top - 22)
+                el.style.display = ''
+                el.style.webkitTransform = `translate3d(0,${y}px,0)`
+                el.style.transform = `translate3d(0,${y}px,0)`
+                let inner = el.getElementsByClassName('inner-hook')[0]
+                inner.style.webkitTransform = `translate3d(${x}px,0,0)`
+                inner.style.transform = `translate3d(${x}px,0,0)`
             }
         }
     },
-    dropping(el,done){
+    dropping(el, done) {
         /* 触发浏览器重绘 */
         /* eslint-disable no-unused-vars */
-        let rf=el.offsetHeight;//因为浏览器对于重绘是有要求并且是有队列完成的,这是主要为了性能,虽然动画隐藏了小球display none,但没有触发html重绘,或者说没有立即触发html重绘,所以需要手动
-        this.$nextTick(()=>{
+        let rf = el.offsetHeight// 因为浏览器对于重绘是有要求并且是有队列完成的,这是主要为了性能,虽然动画隐藏了小球display none,但没有触发html重绘,或者说没有立即触发html重绘,所以需要手动
+        this.$nextTick(() => {
            this.$nextTick(() => {
-          el.style.webkitTransform = 'translate3d(0,0,0)';
-          el.style.transform = 'translate3d(0,0,0)';
-          let inner = el.getElementsByClassName('inner-hook')[0];
-          inner.style.webkitTransform = 'translate3d(0,0,0)';
-          inner.style.transform = 'translate3d(0,0,0)';
-          el.addEventListener('transitionend', done);
-        });
+          el.style.webkitTransform = 'translate3d(0,0,0)'
+          el.style.transform = 'translate3d(0,0,0)'
+          let inner = el.getElementsByClassName('inner-hook')[0]
+          inner.style.webkitTransform = 'translate3d(0,0,0)'
+          inner.style.transform = 'translate3d(0,0,0)'
+          el.addEventListener('transitionend', done)
+        })
         })
         console.log('dropping')
     },
-    afterDrop(el){
-        let ball=this.dropBalls.shift();
-        if(ball){
-            ball.show = false;
-            el.style.display='none';
+    afterDrop(el) {
+        let ball = this.dropBalls.shift()
+        if (ball) {
+            ball.show = false
+            el.style.display = 'none'
         }
         console.log('after drop')
     },
-    toggleList(){
-         if(!this.totalCount){
-            return;
+    toggleList() {
+         if (!this.totalCount) {
+            return
         }
-        this.fold =!this.fold
+        this.fold = !this.fold
     },
-    empty(){
-        this.selectFoods.forEach((food)=>{
-            food.count = 0;
+    empty() {
+        this.selectFoods.forEach((food) => {
+            food.count = 0
         })
     }
 
-
   },
-  computed:{
-    totalPrice(){
-          let total = 0;
+  computed: {
+    totalPrice() {
+          let total = 0
           this.selectFoods.forEach((foods) => {
               total += foods.price * foods.count
-          });
-          return total;
+          })
+          return total
       },
-    totalCount(){
-        let count = 0;
-        this.selectFoods.forEach((foods)=>{
+    totalCount() {
+        let count = 0
+        this.selectFoods.forEach((foods) => {
             count += foods.count
         })
-        return count;
+        return count
     },
-    payDesc(){
-        if(this.totalPrice === 0){
-            return `¥${this.minPrice}元起送`;
-        }else if (this.totalPrice < this.minPrice ){
-            let diff = this.minPrice -this.totalPrice ;
-            return `还差¥${diff}元起送`;
-        }else{
-            return '去结算';
+    payDesc() {
+        if (this.totalPrice === 0) {
+            return `¥${this.minPrice}元起送`
+        } else if (this.totalPrice < this.minPrice) {
+            let diff = this.minPrice - this.totalPrice 
+            return `还差¥${diff}元起送`
+        } else {
+            return '去结算'
         }
     },
-    payClass(){
-        if (this.totalPrice < this.minPrice ){
-           
-            return 'not-enough';
-        }else{
-            return 'enough';
+    payClass() {
+        if (this.totalPrice < this.minPrice) {
+            return 'not-enough'
+        } else {
+            return 'enough'
         }
     },
     // listShow 属性是计算属性 根据商品个数 显示
-    listShow(){
-        if(!this.totalCount){
-            this.fold = true;
-            return false;
+    listShow() {
+        if (!this.totalCount) {
+            this.fold = true
+            return false
         }
-        let show = !this.fold ;
-        if(show){
-            if(!this.scroll){
-                this.$nextTick(()=>{
-                    this.scroll = new BScroll(this.$refs.listContent,{
-                        click:true
+        let show = !this.fold 
+        if (show) {
+            if (!this.scroll) {
+                this.$nextTick(() => {
+                    this.scroll = new BScroll(this.$refs.listContent, {
+                        click: true
                     })
                 })
-            }else{
-                 this.scroll.refresh();
+            } else {
+                 this.scroll.refresh()
             }
-            
         }
 
-
-        return show;
+        return show
     }
     
   }
@@ -407,20 +403,5 @@ export default {
         &.fade-enter, &.fade-leave-active
             opacity: 0
             background: rgba(7, 17, 27, 0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </style>

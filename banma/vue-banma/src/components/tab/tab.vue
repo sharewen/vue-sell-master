@@ -1,5 +1,6 @@
 <template>
   <div class="tab">
+    <div class="searchIcon">search</div>
     <router-link tag="div" class="tab-item" to="/recommend">
       <span class="tab-link">推荐</span>
     </router-link>
@@ -12,6 +13,7 @@
     <router-link tag="div" class="tab-item" to="/active">
       <span class="tab-link">活动</span>
     </router-link>
+    <div class="closeBtn">X</div>
   </div>
 </template>
 
@@ -26,11 +28,17 @@
     height: 44px
     line-height: 44px
     font-size: $font-size-medium
+    .searchIcon
+      flex:0 0 50px
+      text-align:center
+    .closeBtn
+      flex:0 0 50px
+      text-align:center
     .tab-item
       flex: 1
       text-align: center
       .tab-link
-        padding-bottom: 5px
+        padding-bottom: 2px
         color: $color-text-l
       &.router-link-active
         .tab-link
