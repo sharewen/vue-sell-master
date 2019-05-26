@@ -7,7 +7,7 @@
     <router-link tag="div" class="tab-item" to="/carFriends">
       <span class="tab-link">车友圈</span>
     </router-link>
-    <router-link tag="div" class="tab-item" to="/banClass">
+    <router-link tag="div" class="tab-item" to="/banmaClassroom">
       <span class="tab-link">小斑课堂</span>
     </router-link>
     <router-link tag="div" class="tab-item" to="/active">
@@ -23,11 +23,13 @@
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   @import "~common/stylus/variable"
+  @import "~common/stylus/mixin"
   .tab
     display: flex
     height: 44px
     line-height: 44px
     font-size: $font-size-medium
+    border-1px(#ccc)
     .searchIcon
       flex:0 0 50px
       text-align:center

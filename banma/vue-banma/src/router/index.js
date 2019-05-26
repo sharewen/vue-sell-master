@@ -7,6 +7,16 @@ const Recommend = (resolve) => {
     resolve(module)
   })
 }
+const CarFriends = (resolve) => {
+  import('components/carFriends/carFriends').then((module) => {
+    resolve(module)
+  })
+}
+const BanmaClassroom = (resolve) => {
+  import('components/banmaClassroom/banmaClassroom').then((module) => {
+    resolve(module)
+  })
+}
 
 export default new Router({
   routes: [
@@ -17,6 +27,14 @@ export default new Router({
     {
       path: '/recommend',
       component: Recommend
+    },
+    {
+      path: '/carFriends',
+      component: CarFriends
+    },
+    {
+      path: '/banmaClassroom',
+      component: BanmaClassroom
     }
   ]
 })

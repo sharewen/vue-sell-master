@@ -3,15 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import fastclick from 'fastclick'
 import VueLazyload from 'vue-lazyload'
 import 'common/stylus/index.styl'
-
+import fastclick from 'fastclick'
 Vue.config.productionTip = false
 
-/* eslint-disable no-unused-vars */
-// import vConsole from 'vconsole'
-
+// const fastClick = require('common/js/fastclick.js')
+// console.log(fastclick)
 fastclick.attach(document.body)
 
 Vue.use(VueLazyload, {
