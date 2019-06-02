@@ -1,5 +1,8 @@
 <template>
     <div class="banma-main carFriends" ref="carFriends">
+        <car-nav
+        @carList="carList"
+        ></car-nav>
         <scroll class="main-content" ref="list"
             :data="carData"
             :listen-scroll="listenScroll"
@@ -126,6 +129,10 @@
     import Scroll from 'base/scroll/scroll'
     import Swiper from 'swiper'
     import 'swiper/dist/css/swiper.css'
+    import CarNav from 'base/carNav/carNav'
+    // import axios from 'axios'
+    const LatestType = 0
+
     export default {
       created() {
         this.probeType = 3
@@ -160,17 +167,37 @@
             slidesPerView: 3,
             spaceBetween: 10
           })
+        },
+        carList(type) {
+          if (type === LatestType) {
+            console.log('最新list')
+            localStorage.setItem('banmaToken', 'banmaABCD')
+            // this.$
+            this.$axios.get('/api/get').then(res => {
+              console.log(res, 111)
+            })
+          } else {
+            console.log('最热list， 请求拦截')
+            localStorage.removeItem('banmaToken')
+            this.$axios.post('/api/post').then(res => {
+              console.log(res, 22)
+            })
+          }
         }
       },
       components: {
-        Scroll
+        Scroll,
+        CarNav
       }
     }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
+    @import "~common/stylus/variable.styl"
     .carFriends
         .user-header-row
             .content
                 line-height :20px;
+                .time
+                    font-size:$font-size-small;
 </style>        

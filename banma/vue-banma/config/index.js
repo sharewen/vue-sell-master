@@ -10,12 +10,21 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: // 设置dev环境反向代理
+    {
+      '/api': {
+        target: 'http://localhost:5001',
+        changeOrigin: true
+      }
 
+    },
+    hot: true,
+    inline: true,
+    disableHostcheck: true,
     // Various Dev Server settings
     host: '0.0.0', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: false,
+    port: 8089, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-

@@ -6,10 +6,11 @@ import router from './router'
 import VueLazyload from 'vue-lazyload'
 import 'common/stylus/index.styl'
 import fastclick from 'fastclick'
-Vue.config.productionTip = false
+import axios from 'common/js/http'
 
-// const fastClick = require('common/js/fastclick.js')
-// console.log(fastclick)
+// 定义axios 全局对象
+Vue.prototype.$axios = axios
+Vue.config.productionTip = false
 fastclick.attach(document.body)
 
 Vue.use(VueLazyload, {
