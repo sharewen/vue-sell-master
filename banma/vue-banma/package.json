@@ -13,7 +13,7 @@
     "test": "concurrently \"npm run testServer\" \"npm start\""
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "better-scroll": "^0.1.15",
     "concurrently": "^4.1.0",
     "fastclick": "^1.0.6",
